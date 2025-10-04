@@ -113,15 +113,18 @@ export default function Hero() {
   };
 
   return (
-    <section ref={heroRef} className="min-h-screen flex items-center justify-center pt-20">
-      <div className="max-w-6xl mx-auto px-6 text-center">
+    <section 
+      ref={heroRef} 
+      className="min-h-screen flex items-center justify-center pt-16 md:pt-20 px-4 sm:px-6 lg:px-8"
+    >
+      <div className="max-w-6xl mx-auto w-full text-center">
         {/* Badge */}
         <motion.div
-          className="hero-badge inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-8"
+          className="hero-badge inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6 sm:mb-8"
           whileHover={{ scale: 1.05 }}
         >
           <motion.span 
-            className="text-blue-400 text-sm font-medium"
+            className="text-blue-400 text-xs sm:text-sm font-medium"
           >
             AI-Powered Sales Platform
           </motion.span>
@@ -130,9 +133,9 @@ export default function Hero() {
         {/* Main Heading */}
         <motion.h1 
           ref={titleRef}
-          className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-snug sm:leading-tight"
         >
-          <div>{splitText("Revolutionize Your")}</div>
+          <div className="mb-2 sm:mb-4">{splitText("Revolutionize Your")}</div>
           <motion.div
             className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
             initial={{ backgroundPosition: "0% 50%" }}
@@ -154,7 +157,7 @@ export default function Hero() {
         {/* Subheading */}
         <motion.p
           ref={subtitleRef}
-          className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-12 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
         >
           Hyperflow uses advanced AI to automate your sales workflow, 
           predict customer behavior, and boost your conversion rates like never before.
@@ -163,42 +166,42 @@ export default function Hero() {
         {/* CTA Buttons */}
         <motion.div 
           ref={ctaRef}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-16 px-4 sm:px-0"
         >
           <motion.button 
-            className="cta-button bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg font-semibold flex items-center space-x-2 group"
+            className="cta-button bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center space-x-2 group w-full sm:w-auto justify-center"
             whileHover={{ 
               scale: 1.05,
               boxShadow: "0 20px 40px -10px rgba(59, 130, 246, 0.4)"
             }}
             whileTap={{ scale: 0.95 }}
           >
-            <span>Start Free Trial</span>
+            <span className="text-sm sm:text-base">Start Free Trial</span>
             <motion.div
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </motion.div>
           </motion.button>
           
           <motion.button 
-            className="cta-button border border-gray-600 hover:border-gray-400 text-white px-8 py-4 rounded-lg font-semibold flex items-center space-x-2 group backdrop-blur-sm"
+            className="cta-button border border-gray-600 hover:border-gray-400 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center space-x-2 group backdrop-blur-sm w-full sm:w-auto justify-center"
             whileHover={{ 
               scale: 1.05,
               backgroundColor: "rgba(255, 255, 255, 0.1)"
             }}
             whileTap={{ scale: 0.95 }}
           >
-            <Play className="w-5 h-5" />
-            <span>View Demo</span>
+            <Play className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="text-sm sm:text-base">View Demo</span>
           </motion.button>
         </motion.div>
 
         {/* Stats */}
         <motion.div 
           ref={statsRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-white/10"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-6 sm:pt-8 border-t border-white/10 mx-4 sm:mx-0"
         >
           {[
             { value: "98%", label: "Accuracy Rate" },
@@ -207,19 +210,19 @@ export default function Hero() {
           ].map((stat) => (
             <motion.div
               key={stat.label}
-              className="stat-item text-center group cursor-pointer"
+              className="stat-item text-center group cursor-pointer p-4 sm:p-0"
               whileHover={{ 
                 scale: 1.05,
                 y: -5
               }}
             >
               <motion.div 
-                className="text-3xl font-bold text-white mb-2"
+                className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2"
                 whileHover={{ color: "#60A5FA" }}
               >
                 {stat.value}
               </motion.div>
-              <div className="text-gray-400 group-hover:text-gray-300 transition-colors">
+              <div className="text-gray-400 group-hover:text-gray-300 transition-colors text-sm sm:text-base">
                 {stat.label}
               </div>
             </motion.div>
