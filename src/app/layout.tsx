@@ -25,15 +25,22 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased hyperflow-bg`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Animated Background Elements */}
-        <div className="gradient-orb orb-1" />
-        <div className="gradient-orb orb-2" />
-        <div className="grid-overlay" />
+        {/* Background Container - Fixed position for scroll */}
+        <div className="background-container">
+          <div className="hyperflow-bg">
+            <div className="gradient-orb orb-1" />
+            <div className="gradient-orb orb-2" />
+            <div className="gradient-orb orb-3" />
+            <div className="gradient-orb orb-4" />
+            <div className="grid-overlay" />
+            <div className="noise-texture" />
+          </div>
+        </div>
         
-        {/* Main Content */}
-        <div className="content-layer">
+        {/* Main Content - Normal flow for scroll */}
+        <div className="main-content">
           {children}
         </div>
       </body>
