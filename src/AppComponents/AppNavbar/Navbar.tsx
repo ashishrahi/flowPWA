@@ -31,25 +31,25 @@ export default function Navbar({ handleAnchorClick }: NavbarProps) {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
-        className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-4xl"
+        className="fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 z-50 w-[90%] sm:w-[95%] max-w-4xl"
       >
         {/* Glass Navbar Container */}
         <div className="backdrop-blur-2xl border border-white/15 rounded-2xl bg-white/5 shadow-2xl shadow-black/20">
-          <div className="flex items-center justify-between px-4 py-3 md:px-8 md:py-4">
+          <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 py-3">
             
             {/* Logo - Always Visible */}
             <motion.div
-              className="flex items-center space-x-2 group cursor-pointer z-20"
+              className="flex items-center space-x-2 group cursor-pointer z-20 flex-shrink-0"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <motion.div
-                className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg"
+                className="w-6 h-6 sm:w-7 sm:h-7 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg"
                 whileHover={{ rotate: 180 }}
                 transition={{ duration: 0.6 }}
               />
               <motion.span
-                className="text-white font-bold text-lg md:text-xl"
+                className="text-white font-bold text-lg sm:text-xl whitespace-nowrap"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
@@ -64,7 +64,7 @@ export default function Navbar({ handleAnchorClick }: NavbarProps) {
                 <motion.button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-gray-300 hover:text-white transition-colors text-sm font-medium px-3 py-2 lg:px-4 lg:py-2 rounded-full hover:bg-white/5 min-w-[80px] lg:min-w-[90px] text-center"
+                  className="text-gray-300 hover:text-white transition-colors text-sm font-medium px-3 py-2 lg:px-4 lg:py-2 rounded-full hover:bg-white/5 min-w-[80px] lg:min-w-[90px] text-center whitespace-nowrap"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
@@ -79,10 +79,10 @@ export default function Navbar({ handleAnchorClick }: NavbarProps) {
             </div>
 
             {/* Desktop CTA Buttons - Hidden on Mobile */}
-            <div className="hidden md:flex items-center space-x-3">
+            <div className="hidden md:flex items-center space-x-3 flex-shrink-0">
               <ThemeToggle />
               <motion.button
-                className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium border border-white/20 hover:border-white/30 transition-all duration-300"
+                className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-medium border border-white/20 hover:border-white/30 transition-all duration-300 whitespace-nowrap"
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 8px 25px -8px rgba(255, 255, 255, 0.2)"
@@ -94,15 +94,16 @@ export default function Navbar({ handleAnchorClick }: NavbarProps) {
             </div>
 
             {/* Mobile Menu Button - Visible only on Mobile */}
-            <div className="flex items-center space-x-3 md:hidden">
+            <div className="flex items-center space-x-2 sm:space-x-3 md:hidden">
               <ThemeToggle />
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-white p-2 rounded-lg bg-white/10 border border-white/20"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Toggle menu"
               >
-                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {isMobileMenuOpen ? <X size={18} className="sm:w-5 sm:h-5" /> : <Menu size={18} className="sm:w-5 sm:h-5" />}
               </motion.button>
             </div>
           </div>
@@ -115,9 +116,9 @@ export default function Navbar({ handleAnchorClick }: NavbarProps) {
               height: isMobileMenuOpen ? 'auto' : 0
             }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
+            className="md:hidden overflow-hidden border-t border-white/10"
           >
-            <div className="px-4 py-4 border-t border-white/10 space-y-2">
+            <div className="px-4 py-4 space-y-2">
               {navItems.map((item, index) => (
                 <motion.button
                   key={item.name}
@@ -131,6 +132,7 @@ export default function Navbar({ handleAnchorClick }: NavbarProps) {
                   {item.name}
                 </motion.button>
               ))}
+              
               {/* Mobile CTA Button */}
               <motion.button
                 onClick={() => handleNavClick("#contact")}
@@ -151,7 +153,6 @@ export default function Navbar({ handleAnchorClick }: NavbarProps) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />

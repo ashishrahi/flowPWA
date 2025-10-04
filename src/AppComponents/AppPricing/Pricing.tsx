@@ -81,83 +81,87 @@ export default function Pricing() {
           </p>
         </div>
 
-        {/* Pricing Cards */}
+        {/* Pricing Cards - Equal height and width */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {plans.map((plan, index) => (
-            <div
-              key={index}
-              className={`relative rounded-3xl p-8 backdrop-blur-2xl border transition-all duration-500 hover:scale-105 hover:shadow-2xl group overflow-hidden ${
-                plan.popular
-                  ? 'bg-gradient-to-br from-blue-500/15 via-purple-500/10 to-pink-500/15 border-blue-400/40 shadow-2xl shadow-blue-500/25'
-                  : 'bg-white/5 border-white/15 hover:border-white/25 shadow-xl shadow-black/10'
-              }`}
-            >
-              {/* Animated Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-50 group-hover:opacity-70 transition-opacity duration-500`} />
-              
-              {/* Glass Overlay */}
-              <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl rounded-3xl" />
-              
-              {/* Shine Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-
-              {/* Popular Badge - FIXED: Now properly shown */}
+            <div key={index} className="relative flex flex-col">
+              {/* Most Popular Badge */}
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
-                  <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-2xl shadow-purple-500/30 backdrop-blur-sm flex items-center gap-2">
-                    <Star className="w-4 h-4 fill-current" />
+                <div className="absolute left-1/2 transform -translate-x-1/2 z-10 w-full flex justify-center">
+                  <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-3 py-2 rounded-full text-sm font-semibold shadow-lg shadow-purple-500/40 backdrop-blur-sm flex items-center gap-2 border border-white/20 whitespace-nowrap">
+                    <Star className="w-3 h-3 fill-current " />
                     Most Popular
                   </span>
                 </div>
               )}
 
-              {/* Card Content */}
-              <div className="relative z-10">
-                <div className="text-center mb-8">
-                  {/* Plan Icon */}
-                  <div className={`inline-flex p-3 rounded-2xl mb-4 ${
-                    plan.popular 
-                      ? 'bg-blue-500/20 text-blue-300' 
-                      : 'bg-white/10 text-gray-300'
-                  }`}>
-                    {plan.icon}
+              {/* Card Container with equal dimensions */}
+              <div
+                className={`relative rounded-3xl p-8 backdrop-blur-2xl border transition-all duration-500 hover:scale-105 hover:shadow-2xl group flex-1 flex flex-col min-h-[600px] ${
+                  plan.popular
+                    ? 'bg-gradient-to-br from-blue-500/15 via-purple-500/10 to-pink-500/15 border-blue-400/40 shadow-2xl shadow-blue-500/25 mt-1'
+                    : 'bg-white/5 border-white/15 hover:border-white/25 shadow-xl shadow-black/10'
+                }`}
+              >
+                {/* Animated Background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${plan.gradient} opacity-50 group-hover:opacity-70 transition-opacity duration-500 rounded-3xl`} />
+                
+                {/* Glass Overlay */}
+                <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl rounded-3xl" />
+                
+                {/* Shine Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 rounded-3xl" />
+
+                {/* Card Content - Flex column to push button to bottom */}
+                <div className="relative z-10 flex flex-col flex-1">
+                  <div className="text-center mb-8">
+                    {/* Plan Icon */}
+                    <div className={`inline-flex p-3 rounded-2xl mb-4 ${
+                      plan.popular 
+                        ? 'bg-blue-500/20 text-blue-300' 
+                        : 'bg-white/10 text-gray-300'
+                    }`}>
+                      {plan.icon}
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
+                      {plan.name}
+                    </h3>
+                    <div className="flex items-baseline justify-center mb-3">
+                      <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                        {plan.price}
+                      </span>
+                      {plan.price !== "Custom" && (
+                        <span className="text-gray-400 ml-2">/{plan.period}</span>
+                      )}
+                    </div>
+                    <p className="text-gray-300 text-sm leading-relaxed">{plan.description}</p>
                   </div>
-                  
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
-                    {plan.name}
-                  </h3>
-                  <div className="flex items-baseline justify-center mb-3">
-                    <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                      {plan.price}
-                    </span>
-                    {plan.price !== "Custom" && (
-                      <span className="text-gray-400 ml-2">/{plan.period}</span>
-                    )}
+
+                  {/* Features List - Flex-grow to take available space */}
+                  <div className="flex-1 mb-8">
+                    <ul className="space-y-3">
+                      {plan.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+                          <Check className="text-green-400 mr-3 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform duration-300 w-5 h-5" />
+                          <span className="text-sm leading-relaxed">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="text-gray-300 text-sm leading-relaxed">{plan.description}</p>
+
+                  {/* CTA Button - Pushed to bottom */}
+                  <button
+                    className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm border relative overflow-hidden group/btn flex items-center justify-center gap-2 mt-auto ${
+                      plan.popular
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-transparent shadow-2xl shadow-blue-500/30 hover:shadow-blue-500/50'
+                        : 'bg-white/10 hover:bg-white/20 text-white border-white/20 hover:border-white/30 shadow-lg hover:shadow-white/10'
+                    }`}
+                  >
+                    <span className="relative z-10">{plan.cta}</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                  </button>
                 </div>
-
-                {/* Features List */}
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
-                      <Check className="text-green-400 mr-3 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform duration-300 w-5 h-5" />
-                      <span className="text-sm leading-relaxed">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA Button */}
-                <button
-                  className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm border relative overflow-hidden group/btn flex items-center justify-center gap-2 ${
-                    plan.popular
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-transparent shadow-2xl shadow-blue-500/30 hover:shadow-blue-500/50'
-                      : 'bg-white/10 hover:bg-white/20 text-white border-white/20 hover:border-white/30 shadow-lg hover:shadow-white/10'
-                  }`}
-                >
-                  <span className="relative z-10">{plan.cta}</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                </button>
               </div>
             </div>
           ))}
@@ -165,7 +169,7 @@ export default function Pricing() {
 
         {/* Additional Info */}
         <div className="text-center mt-12">
-          <p className="text-gray-400 text-sm backdrop-blur-sm bg-white/5 rounded-lg py-3 px-6 items-center gap-2">
+          <p className="text-gray-400 text-sm backdrop-blur-sm bg-white/5 rounded-lg py-3 px-6 inline-flex items-center gap-2">
             <CreditCard className="w-4 h-4" />
             All plans include 14-day free trial. No credit card required.
           </p>
