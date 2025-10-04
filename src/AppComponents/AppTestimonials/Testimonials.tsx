@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
@@ -33,8 +33,9 @@ const testimonials = [
     content: "Integration was seamless and the support team is fantastic. Highly recommended for any sales team!",
     rating: 5
   }
-];
+] as const;
 
+// Fixed slide variants with proper TypeScript typing
 const slideVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 300 : -300,
@@ -46,41 +47,46 @@ const slideVariants = {
     x: 0,
     opacity: 1,
     scale: 1,
-    rotateY: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.25, 0.1, 0.25, 1.0]
-    }
+    rotateY: 0
   },
   exit: (direction: number) => ({
     x: direction > 0 ? -300 : 300,
     opacity: 0,
     scale: 0.8,
-    rotateY: direction > 0 ? -45 : 45,
-    transition: {
-      duration: 0.8,
-      ease: [0.25, 0.1, 0.25, 1.0]
-    }
+    rotateY: direction > 0 ? -45 : 45
   })
+};
+
+// Fixed transition configuration
+const transitionConfig = {
+  duration: 0.8,
+  ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number]
 };
 
 export default function Testimonials() {
   const [[currentTestimonial, direction], setCurrentTestimonial] = useState([0, 0]);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const nextTestimonial = () => {
-    setCurrentTestimonial([(currentTestimonial + 1) % testimonials.length, 1]);
-  };
+  // Fixed: Removed unnecessary dependencies
+  const nextTestimonial = useCallback(() => {
+    setCurrentTestimonial(prev => [(prev[0] + 1) % testimonials.length, 1]);
+  }, []); // Empty dependency array since testimonials.length is constant
 
-  const prevTestimonial = () => {
-    setCurrentTestimonial([(currentTestimonial - 1 + testimonials.length) % testimonials.length, -1]);
-  };
+  const prevTestimonial = useCallback(() => {
+    setCurrentTestimonial(prev => [(prev[0] - 1 + testimonials.length) % testimonials.length, -1]);
+  }, []); // Empty dependency array
 
+  const goToTestimonial = useCallback((index: number) => {
+    setCurrentTestimonial(prev => [index, index > prev[0] ? 1 : -1]);
+  }, []); // No dependencies needed
+
+  // Auto-advance testimonials
   useEffect(() => {
     const interval = setInterval(nextTestimonial, 5000);
     return () => clearInterval(interval);
-  }, [currentTestimonial]);
+  }, [nextTestimonial]);
 
+  // GSAP animations on mount
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(".testimonial-section",
@@ -126,7 +132,7 @@ export default function Testimonials() {
             </motion.span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Do not just take our word for it. Here is what our customers have to say about their experience.
+            Donot just take our word for it. Here is what our customers have to say about their experience.
           </p>
         </motion.div>
 
@@ -140,6 +146,7 @@ export default function Testimonials() {
                 initial="enter"
                 animate="center"
                 exit="exit"
+                transition={transitionConfig}
                 className="absolute inset-0 w-full h-full"
               >
                 <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-200 dark:border-gray-700 h-full transform-style-preserve-3d">
@@ -165,7 +172,7 @@ export default function Testimonials() {
                       className="flex justify-center mb-6"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ delay: 0.4, staggerChildren: 0.1 }}
+                      transition={{ delay: 0.4 }}
                     >
                       {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
                         <motion.div
@@ -243,7 +250,7 @@ export default function Testimonials() {
             {testimonials.map((_, index) => (
               <motion.button
                 key={index}
-                onClick={() => setCurrentTestimonial([index, index > currentTestimonial ? 1 : -1])}
+                onClick={() => goToTestimonial(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentTestimonial
                     ? 'bg-blue-600'
