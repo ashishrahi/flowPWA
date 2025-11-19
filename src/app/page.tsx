@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from 'framer-motion';
 import { useCallback } from 'react';
 import Features from "@/AppComponents/AppFeatures/Features";
 import Footer from "@/AppComponents/AppFooter/Footer";
@@ -22,12 +21,7 @@ export default function Home() {
   }, []);
 
   return (
-    <motion.main
-      className="min-h-screen"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
-    >
+    <main className="min-h-screen">
       <Navbar handleAnchorClick={handleAnchorClick} />
       <Hero />
       <Features />
@@ -35,6 +29,6 @@ export default function Home() {
       <Testimonials />
       <ContactForm />
       <Footer />
-    </motion.main>
+    </main>
   );
 }
