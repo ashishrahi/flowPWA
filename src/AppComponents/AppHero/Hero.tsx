@@ -13,8 +13,8 @@ export default function Hero() {
     >
       <div className="max-w-6xl mx-auto w-full text-center">
         {/* Badge */}
-        <div className="hero-badge inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 sm:mb-8">
-          <span className="text-primary text-xs sm:text-sm font-medium">
+        <div className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-muted border border-border mb-6 sm:mb-8">
+          <span className="text-foreground text-xs sm:text-sm font-medium">
             Powerful Features for Modern Marketing
           </span>
         </div>
@@ -22,30 +22,30 @@ export default function Hero() {
         {/* Main Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-snug sm:leading-tight">
           <div className="mb-2 sm:mb-4">Revolutionize Your</div>
-          <div className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <div className="text-foreground">
             Marketing Process
           </div>
         </h1>
 
         {/* Subheading */}
-        <p
-          className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
-        >
+        <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
           Everything you need to craft intelligent strategies, impactful content,
           and high-performing campaigns — all powered by insight and creativity.
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-16 px-4 sm:px-0">
+          {/* Primary CTA */}
           <button
-            className="cta-button bg-gradient-to-r from-primary to-accent text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center space-x-2 group w-full sm:w-auto justify-center"
+            className="bg-foreground text-background px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center space-x-2 w-full sm:w-auto justify-center hover:opacity-90 transition"
           >
             <span className="text-sm sm:text-base">Start Free Trial</span>
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
+          {/* Secondary CTA */}
           <button
-            className="cta-button border border-border text-foreground px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center space-x-2 group backdrop-blur-sm w-full sm:w-auto justify-center bg-accent/10"
+            className="border border-border text-foreground px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center space-x-2 w-full sm:w-auto justify-center bg-accent hover:bg-accent/70 transition"
           >
             <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
             <span className="text-sm sm:text-base">Book a Consulting Call</span>
@@ -60,11 +60,8 @@ export default function Hero() {
             { value: "3.2x", label: "Faster Go-to-Market Execution" },
             { value: "24/7", label: "AI-Powered Marketing Assistance" },
           ].map((stat) => (
-            <div
-              key={stat.label}
-              className="stat-item text-center p-4 sm:p-0"
-            >
-              <div className="text-2xl sm:text-3xl font-bold text-foreground mb-1 sm:mb-2">
+            <div key={stat.label} className="text-center p-4 sm:p-0">
+              <div className="text-2xl sm:text-3xl font-bold mb-1 sm:mb-2">
                 {stat.value}
               </div>
               <div className="text-muted-foreground text-sm sm:text-base">

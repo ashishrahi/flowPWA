@@ -1,5 +1,4 @@
 "use client";
-
 import { useCallback } from 'react';
 import Features from "@/AppComponents/AppFeatures/Features";
 import Footer from "@/AppComponents/AppFooter/Footer";
@@ -14,7 +13,7 @@ export default function Home() {
   const handleAnchorClick = useCallback((hash: string) => {
     const element = document.querySelector(hash);
     if (element) {
-      const offset = 80; // offset for fixed navbar
+      const offset = 80; 
       const top = element.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
     }

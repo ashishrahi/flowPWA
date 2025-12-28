@@ -17,73 +17,63 @@ const FEATURES_DATA = Object.freeze([
     description:
       "We combine human expertise with data intelligence to uncover deep audience insights and craft strategies that drive measurable growth.",
     Icon: Target,
-    gradient: "from-primary/20 to-secondary/20",
   },
   {
     title: "High-Impact Content Creation",
     description:
       "From storytelling to SEO — our content is engineered to engage, convert, and build brand loyalty across every channel.",
     Icon: Zap,
-    gradient: "from-accent/20 to-primary/20",
   },
   {
     title: "Design That Performs",
     description:
       "Beautiful design meets strategic intent. We create visuals that captivate, clarify, and convert — powered by user insight and creativity.",
     Icon: BarChart3,
-    gradient: "from-muted/20 to-accent/20",
   },
   {
     title: "Predictive Campaign Intelligence",
     description:
       "Leverage AI analytics to anticipate trends, optimize budgets, and ensure every campaign performs at its peak.",
     Icon: Link,
-    gradient: "from-secondary/20 to-primary/20",
   },
   {
     title: "Omnichannel Marketing Automation",
     description:
       "Automate and personalize your customer journeys across platforms — delivering the right message at the right moment.",
     Icon: Eye,
-    gradient: "from-accent/20 to-muted/20",
   },
   {
     title: "Collaborative Brand Ecosystem",
     description:
       "Your team + our experts = unstoppable growth. Seamless communication, shared vision, and unified brand direction.",
     Icon: Users,
-    gradient: "from-primary/20 to-secondary/20",
   },
 ]);
 
 const FeatureCard = React.memo(function FeatureCard({ feature }: any) {
-  const { title, description, Icon, gradient } = feature;
+  const { title, description, Icon } = feature;
 
   return (
     <div className="relative group cursor-pointer">
-      <div
-        className={`relative h-full rounded-2xl p-6 sm:p-8 backdrop-blur-xl border border-border bg-card/5 hover:bg-card/10 transition-all duration-300 overflow-hidden`}
-      >
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`}
-        />
-
+      <div className="relative h-full rounded-2xl p-6 sm:p-8 backdrop-blur-xl border border-border bg-card/10 hover:bg-card/20 transition-all duration-300 overflow-hidden">
         <div className="relative z-10">
-          <div className="inline-flex p-4 rounded-2xl mb-6 bg-muted/10 backdrop-blur-sm border border-border transition-colors duration-300">
-            <div className="text-foreground">
-              <Icon className="w-6 h-6" />
-            </div>
+          {/* Icon */}
+          <div className="inline-flex p-4 rounded-2xl mb-6 bg-muted/30 border border-border transition-colors duration-300">
+            <Icon className="w-6 h-6 text-foreground" />
           </div>
 
+          {/* Title */}
           <h3 className="text-xl font-semibold text-foreground mb-4">
             {title}
           </h3>
 
+          {/* Description */}
           <p className="text-muted-foreground leading-relaxed text-base">
             {description}
           </p>
 
-          <div className="flex items-center text-primary mt-4 opacity-100 transition-opacity duration-300">
+          {/* Link */}
+          <div className="flex items-center text-foreground mt-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
             <span className="text-sm font-medium mr-2">Learn more</span>
             <span className="text-base">→</span>
           </div>
@@ -97,19 +87,23 @@ export default function FeaturesWithoutAnimation() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section ref={sectionRef} id="features" className="py-20 relative bg-background text-foreground">
-      {/* Soft Background Blobs */}
+    <section
+      ref={sectionRef}
+      id="features"
+      className="py-20 relative bg-background text-foreground"
+    >
+      {/* Soft Background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-secondary/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-muted/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-muted/20 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
-        <div className="features-header text-center mb-16">
+        <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-foreground mb-6">
-            Powerful Features for{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent block mt-2">
+            Powerful Features for
+            <span className="block mt-2">
               Modern Sales
             </span>
           </h2>
@@ -131,7 +125,7 @@ export default function FeaturesWithoutAnimation() {
             <span className="text-foreground font-semibold text-base mr-2">
               Explore all features
             </span>
-            <span className="text-primary">→</span>
+            <span className="text-muted-foreground">→</span>
           </div>
         </div>
       </div>
