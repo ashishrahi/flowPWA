@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import {
   Target,
   Zap,
@@ -8,10 +8,26 @@ import {
   Link,
   Eye,
   Users,
+  type LucideIcon,
 } from "lucide-react";
-import React from "react";
 
-const FEATURES_DATA = Object.freeze([
+/* ----------------------------------
+   Types
+-----------------------------------*/
+interface Feature {
+  title: string;
+  description: string;
+  Icon: LucideIcon;
+}
+
+interface FeatureCardProps {
+  feature: Feature;
+}
+
+/* ----------------------------------
+   Data
+-----------------------------------*/
+const FEATURES_DATA: readonly Feature[] = Object.freeze([
   {
     title: "AI-Backed Marketing Strategy",
     description:
@@ -50,30 +66,31 @@ const FEATURES_DATA = Object.freeze([
   },
 ]);
 
-const FeatureCard = React.memo(function FeatureCard({ feature }: any) {
+/* ----------------------------------
+   Card
+-----------------------------------*/
+const FeatureCard = React.memo(function FeatureCard({
+  feature,
+}: FeatureCardProps) {
   const { title, description, Icon } = feature;
 
   return (
     <div className="relative group cursor-pointer">
       <div className="relative h-full rounded-2xl p-6 sm:p-8 backdrop-blur-xl border border-border bg-card/10 hover:bg-card/20 transition-all duration-300 overflow-hidden">
         <div className="relative z-10">
-          {/* Icon */}
-          <div className="inline-flex p-4 rounded-2xl mb-6 bg-muted/30 border border-border transition-colors duration-300">
+          <div className="inline-flex p-4 rounded-2xl mb-6 bg-muted/30 border border-border">
             <Icon className="w-6 h-6 text-foreground" />
           </div>
 
-          {/* Title */}
           <h3 className="text-xl font-semibold text-foreground mb-4">
             {title}
           </h3>
 
-          {/* Description */}
           <p className="text-muted-foreground leading-relaxed text-base">
             {description}
           </p>
 
-          {/* Link */}
-          <div className="flex items-center text-foreground mt-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="flex items-center text-foreground mt-4 opacity-80 group-hover:opacity-100 transition-opacity">
             <span className="text-sm font-medium mr-2">Learn more</span>
             <span className="text-base">→</span>
           </div>
@@ -83,6 +100,9 @@ const FeatureCard = React.memo(function FeatureCard({ feature }: any) {
   );
 });
 
+/* ----------------------------------
+   Section
+-----------------------------------*/
 export default function FeaturesWithoutAnimation() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -92,37 +112,31 @@ export default function FeaturesWithoutAnimation() {
       id="features"
       className="py-20 relative bg-background text-foreground"
     >
-      {/* Soft Background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-muted/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-muted/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-muted/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-muted/20 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-foreground mb-6">
             Powerful Features for
-            <span className="block mt-2">
-              Modern Sales
-            </span>
+            <span className="block mt-2">Modern Sales</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Everything you need to supercharge your sales process in one platform.
           </p>
         </div>
 
-        {/* Feature Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {FEATURES_DATA.map((f) => (
-            <FeatureCard key={f.title} feature={f} />
+          {FEATURES_DATA.map((feature) => (
+            <FeatureCard key={feature.title} feature={feature} />
           ))}
         </div>
 
-        {/* Bottom Link */}
         <div className="text-center mt-12">
-          <div className="inline-flex backdrop-blur-xl bg-card/10 border border-border rounded-xl px-6 py-3 transition-all duration-300 cursor-pointer hover:bg-card/20">
-            <span className="text-foreground font-semibold text-base mr-2">
+          <div className="inline-flex backdrop-blur-xl bg-card/10 border border-border rounded-xl px-6 py-3 hover:bg-card/20 transition cursor-pointer">
+            <span className="text-foreground font-semibold mr-2">
               Explore all features
             </span>
             <span className="text-muted-foreground">→</span>
