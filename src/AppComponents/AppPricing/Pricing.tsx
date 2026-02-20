@@ -68,10 +68,11 @@ export default function Pricing() {
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
+          <h2 className="text-4xl font-bold mb-4 text-neutral-900 dark:text-neutral-100">
             Simple, Transparent Pricing
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
             Choose the plan that fits your business. All plans include a 14-day free trial.
           </p>
         </div>
@@ -81,11 +82,10 @@ export default function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative border rounded-2xl p-8 flex flex-col ${
-                plan.popular
+              className={`relative border rounded-2xl p-8 flex flex-col ${plan.popular
                   ? "border-foreground"
                   : "border-border"
-              }`}
+                }`}
             >
               {/* Popular Badge */}
               {plan.popular && (
@@ -132,11 +132,10 @@ export default function Pricing() {
 
               {/* CTA */}
               <button
-                className={`w-full py-3 rounded-xl font-semibold border transition ${
-                  plan.popular
+                className={`w-full py-3 rounded-xl font-semibold border transition ${plan.popular
                     ? "bg-foreground text-background border-foreground"
                     : "border-border hover:bg-muted"
-                }`}
+                  }`}
               >
                 {plan.cta}
               </button>
